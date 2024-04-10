@@ -31,10 +31,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public String create(String idEmployee, String firstName, String lastName, String role, double salary) {
-        employeeService.addEmployee(new Employee(idEmployee, firstName, lastName, role, salary));
-        return apiEmployee();
+    public String create(@RequestParam String employeeId, 
+                        @RequestParam String firstName, 
+                        @RequestParam String lastName, 
+                        @RequestParam String role, 
+                        @RequestParam double salary) {
+        employeeService.addEmployee(new Employee(employeeId, firstName, lastName, role, salary));
+        return "redirect:/employee/api";
     }
+
 
     @GetMapping("/update/{id}")
     public String updateEmployee(@PathVariable String id, Model model) {
@@ -82,4 +87,10 @@ public class EmployeeController {
         employeeService.addEmployee(employee);
         return employeeService.getAllEmployees();
     }
+
+    @GetMapping("/api/employee/{id}")
+    public Employee getEmployee(@PathVariable String id) {
+        return employeeService.getEmployee(id);
+    }
+    
 }

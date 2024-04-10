@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Empleado</title>
+</head>
+<body>
+    <h1>Actualizar Empleado</h1>
+    
+    <form id="updateEmployeeForm">
+        <label for="firstName">Nombre:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+        
+        <label for="lastName">Apellido:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+        
+        <label for="role">Rol:</label>
+        <input type="text" id="role" name="role" required><br><br>
+        
+        <label for="salary">Salario:</label>
+        <input type="number" id="salary" name="salary" required><br><br>
+        
+        <button type="submit">Actualizar</button>
+    </form>
+    
+    <script>
+        // Obtener el ID del empleado de la URL
+        var url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        
+        // Fetch para obtener los datos del empleado
+        fetch('/api/employee/' + id)
+            .then(response => response.json())
+            .then(employee => {
+                // Llenar los campos del formulario con los datos del empleado
+                document.getElementById('firstName').value = employee.firstName;
+                document.getElementById('lastName').value = employee.lastName;
+                document.getElementById('role').value = employee.role;
+                document.getElementById('salary').value = employee.salary;
+            })
+            .catch(error => console.error('Error obteniendo datos del empleado:', error));
+        
+        // Manejar la presentación del formulario
+        document.getElementById('updateEmployeeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+            
+            var formData = new FormData(this);
+            
+            // Fetch para enviar los datos actualizados del empleado
+            fetch('/employee/update/' + id, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirigir a la página principal o mostrar un mensaje de éxito
+                    window.location.href = '/employee/api';
+                } else {
+                    // Manejar el caso si la actualización falla
+                    console.error('Error actualizando empleado');
+                }
+            })
+            .catch(error => console.error('Error actualizando empleado:', error));
+        });
+    </script>
+    
+</body>
+</html>
