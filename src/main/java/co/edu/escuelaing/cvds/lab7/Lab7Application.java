@@ -1,10 +1,12 @@
 package co.edu.escuelaing.cvds.lab7;
 
 import co.edu.escuelaing.cvds.lab7.model.Configuration;
+import co.edu.escuelaing.cvds.lab7.model.Employee;
 import co.edu.escuelaing.cvds.lab7.model.User;
 import co.edu.escuelaing.cvds.lab7.model.UserRole;
 import co.edu.escuelaing.cvds.lab7.repository.UserRepository;
 import co.edu.escuelaing.cvds.lab7.service.ConfigurationService;
+import co.edu.escuelaing.cvds.lab7.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,16 +21,19 @@ import java.util.Arrays;
 @Slf4j
 public class Lab7Application {
 	private final ConfigurationService configurationService;
+	private final EmployeeService employeeService;
 
 	private final UserRepository userRepository;
 
 	@Autowired
 	public Lab7Application(
 			ConfigurationService configurationService,
-			UserRepository userRepository
+			UserRepository userRepository,
+			EmployeeService employeeService
 	) {
 		this.configurationService = configurationService;
 		this.userRepository = userRepository;
+		this.employeeService = employeeService;
 	}
 
 	public static void main(String[] args) {
@@ -48,6 +53,14 @@ public class Lab7Application {
 
 			log.info("\nAdding admin@site.org user with Password: admin");
 			userRepository.save(new User("admin@site.org", "admin", Arrays.asList(UserRole.ADMINISTRADOR, UserRole.CLIENTE)));
+
+			log.info("Adding Employees....");
+			employeeService.addEmployee(new Employee("1", "Camilo", "Perez","Contratista",123456));
+			employeeService.addEmployee(new Employee("2", "Maria", "Torres","Analista",123456));
+			employeeService.addEmployee(new Employee("3", "Mateo", "Rodriguez","Contratista",123456));
+
+		
+
 		};
 	}
 

@@ -1,26 +1,60 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en"><!-- //NOSONAR -->
-<th:block th:replace="fragments/general.html::headerfiles('Greeting Page')"></th:block>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empleados</title>
+</head>
 <body>
-<main>
-    <h1 class="visually-hidden">Welcome Oculto</h1>
-
-    <div class="px-4 py-5 my-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="display-5 fw-bold text-body-emphasis">Welcome</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">This is a demo of Bootstrap CSS, for more examples to <a href="https://getbootstrap.com/docs/5.3/examples/">https://getbootstrap.com/docs/5.3/examples/</a></p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="/greeting?name=Jorge">Go to Greeting example</a>
-                <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/greeting/to-do-item/1">Go to "To Do" Table example</a>
-                <a type="button" class="btn btn-primary btn-lg px-4" href="/configuration/example">Go to get Configuration from DB example</a>
-                <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/configuration/example/api">Go to consume from API example</a>
-                <a type="button" class="btn btn-primary btn-lg px-4" href="/login">Go to Simple Login example</a>
-                <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/esto-no-existe">Example 404 ERROR!</a>
-            </div>
-        </div>
-    </div>
-</main>
-<footer th:replace="fragments/general::empty-footer"></footer>
+    <h1>Lista de Empleados</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Rol</th>
+                <th>Salario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="employeeTableBody">
+            <!-- Aquí se insertarán los empleados -->
+        </tbody>
+    </table>
+    
+    <button onclick="redirectTo('create')">Agregar Empleado</button>
+    
+    <script>
+        function redirectTo(url) {
+            window.location.href = "/employee/" + url;
+        }
+        
+        // Esta parte se modifica para obtener la lista de empleados del backend y mostrarla en la tabla
+        fetch('/employee/api/employees')
+            .then(response => response.json())
+            .then(employees => {
+                var tableBody = document.getElementById('employeeTableBody');
+                employees.forEach(employee => {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${employee.employeeId}</td>
+                        <td>${employee.firstName}</td>
+                        <td>${employee.lastName}</td>
+                        <td>${employee.role}</td>
+                        <td>${employee.salary}</td>
+                        <td>
+                            <button onclick="redirectTo('update/' + ${employee.employeeId})">Editar</button>
+                            <button onclick="redirectTo('delete/' + ${employee.employeeId})">Eliminar</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching employees:', error));
+    </script>
 </body>
 </html>
+
+
