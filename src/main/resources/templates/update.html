@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Empleado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7; /* Color de fondo */
+            color: #333; /* Color del texto */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #007bff; /* Color del título */
+        }
+
+        form {
+            background-color: #fff; /* Color del fondo del formulario */
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff; /* Color de fondo del botón */
+            color: #fff; /* Color del texto del botón */
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Color de fondo del botón al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
     <h1>Actualizar Empleado</h1>
@@ -30,7 +80,7 @@
         var id = url.substring(url.lastIndexOf('/') + 1);
         
         // Fetch para obtener los datos del empleado
-        fetch('/api/employee/' + id)
+        fetch('../../employee/api/employee/' + id)
             .then(response => response.json())
             .then(employee => {
                 // Llenar los campos del formulario con los datos del empleado

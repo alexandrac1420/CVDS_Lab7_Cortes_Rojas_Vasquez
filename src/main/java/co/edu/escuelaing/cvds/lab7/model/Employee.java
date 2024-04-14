@@ -1,5 +1,9 @@
 package co.edu.escuelaing.cvds.lab7.model;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,7 +11,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "EMPLOYEES")
-public class Employee {
+@JsonDeserialize
+public class Employee implements Serializable {
+
+
     @Id
     @Column(name = "EMPLOYEE_ID")
     private String employeeId;

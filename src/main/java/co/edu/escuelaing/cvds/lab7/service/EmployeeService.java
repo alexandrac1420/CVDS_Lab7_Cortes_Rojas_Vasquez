@@ -21,7 +21,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployee(String employeeId) {
-        return employeeRepository.getReferenceById(employeeId);
+        return employeeRepository.findById(employeeId).get();
     }
 
     public List<Employee> getAllEmployees() {

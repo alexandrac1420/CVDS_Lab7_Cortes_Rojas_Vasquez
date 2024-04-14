@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7; /* Color de fondo */
+            color: #333; /* Color del texto */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #007bff; /* Color del título */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff; /* Color del fondo de la tabla */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd; /* Borde inferior */
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff; /* Color del encabezado */
+            color: #fff; /* Color del texto del encabezado */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Color de fondo para filas pares */
+        }
+
+        button {
+            background-color: #007bff; /* Color de fondo del botón */
+            color: #fff; /* Color del texto del botón */
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color de fondo del botón al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
     <h1>Lista de Empleados</h1>
@@ -52,9 +102,7 @@
                     tableBody.appendChild(row);
                 });
             })
-            .catch(error => console.error('Error fetching employees:', error));
+            .catch(error => console.error('Error fetching employees:', error));
     </script>
 </body>
 </html>
-
-

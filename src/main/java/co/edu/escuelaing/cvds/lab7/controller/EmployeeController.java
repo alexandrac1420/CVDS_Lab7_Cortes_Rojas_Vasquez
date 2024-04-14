@@ -89,6 +89,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/api/employee/{id}")
+    @ResponseBody
     public Employee getEmployee(@PathVariable String id) {
         return employeeService.getEmployee(id);
     }
