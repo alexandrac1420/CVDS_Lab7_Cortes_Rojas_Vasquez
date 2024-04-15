@@ -1,6 +1,6 @@
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=PDSW-ECI_spring-mvc-with-bootstrap)](https://sonarcloud.io/summary/new_code?id=PDSW-ECI_spring-mvc-with-bootstrap)
+# Laboratorio 7
 
-# MVC + Bootstrap CSS
-
-## Structure Directory
-https://studygyaan.com/spring-boot/spring-boot-project-folder-structure-and-best-practices
+## Autores
+* __Alexandra Cortes Tovar__
+* __Samuel Rojas Yopasa__
+* __Juan Sebastián Vásquez__
